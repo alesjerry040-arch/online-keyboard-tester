@@ -1,8 +1,5 @@
 # online-keyboard-tester
 Free online keyboard tester to check keys, detect faulty buttons, and test keyboard functionality in real time.
-# Online Keyboard Tester
-
-Welcome to Online Keyboard Tester, a free tool that helps users check whether their keyboard keys are working correctly.
 
 ## Features
 
