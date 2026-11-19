@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Teste seu teclado online gratuitamente. Pressione as teclas e veja em tempo real quais estão funcionando.">
+  <title>Teste de Teclado Online | Teste De Teclado</title>
+  <style>
+    :root {
+      --bg: #f4f7fb; --panel: #ffffff; --ink: #172033; --muted: #64748b;
+      --line: #dce4ef; --key: #f8fafc; --key-hover: #eef4ff;
+      --accent: #2563eb; --accent-soft: #dbeafe; --good: #16a34a;
+      --shadow: 0 12px 34px rgba(25, 45, 80, .08);
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font-family: Arial, Helvetica, sans-serif; }
+    header { background: #fff; border-bottom: 1px solid var(--line); }
+    .wrap { width: min(1120px, calc(100% - 32px)); margin: auto; }
+    .top { min-height: 70px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { font-size: 21px; font-weight: 800; letter-spacing: -.5px; }
+    .brand span { color: var(--accent); }
+    .top a { color: var(--accent); text-decoration:none; font-size:14px; font-weight:700; }
+    main { padding: 42px 0 56px; }
+    .intro { text-align:center; margin-bottom:28px; }
+    .eyebrow { color:var(--accent); font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:1.5px; }
+    h1 { font-size: clamp(28px, 4vw, 42px); margin:10px 0 12px; letter-spacing:-1.2px; }
+    .intro p { color:var(--muted); line-height:1.6; max-width:680px; margin:0 auto; }
+    .panel { background:var(--panel); border:1px solid var(--line); border-radius:18px; box-shadow:var(--shadow); padding:24px; }
+    .statusbar { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:20px; }
+    .status { color:var(--muted); font-size:14px; }
+    .status strong { color:var(--good); }
+    .actions { display:flex; gap:9px; }
+    button { font:inherit; cursor:pointer; }
+    .action { border:1px solid var(--line); background:#fff; color:var(--ink); border-radius:9px; padding:10px 15px; font-weight:700; }
+    .action.primary { background:var(--accent); border-color:var(--accent); color:#fff; }
+    .keyboard { display:flex; flex-direction:column; gap:8px; width:100%; }
+    .keyrow { display:flex; gap:6px; justify-content:center; width:100%; }
+    .key { min-width:0; flex:1; height:48px; border:1px solid #d5deea; border-bottom-width:3px; border-radius:7px; background:var(--key); color:#263449; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; padding:3px; user-select:none; transition:background .08s, border-color .08s, transform .08s; }
+    .key.w15 { flex:1.5; } .key.w2 { flex:2; } .key.w25 { flex:2.5; } .key.w3 { flex:3; } .key.space { flex:6; }
+    .key.active { background:var(--accent); border-color:#1d4ed8; color:white; transform:translateY(2px); border-bottom-width:1px; }
+    .key small { display:block; font-size:9px; font-weight:400; opacity:.75; }
+    .key .twoline { line-height:1.2; text-align:center; }
+    .legend { display:flex; justify-content:center; gap:18px; margin-top:18px; color:var(--muted); font-size:12px; }
+    .dot { display:inline-block; width:9px; height:9px; border-radius:3px; margin-right:6px; background:var(--key); border:1px solid #cbd5e1; }
+    .dot.blue { background:var(--accent); border-color:var(--accent); }
+    .below { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:18px; }
+    .info { background:#fff; border:1px solid var(--line); border-radius:14px; padding:18px 20px; }
+    .info h2 { margin:0 0 10px; font-size:17px; }
+    .info p { margin:0; color:var(--muted); line-height:1.55; font-size:14px; }
+    #lastKey { color:var(--accent); font-weight:800; }
+    footer { text-align:center; color:var(--muted); font-size:13px; padding:22px 0 30px; }
+    footer a { color:var(--accent); text-decoration:none; }
+    @media (max-width:700px) {
+      main { padding-top:28px; }
+      .panel { padding:12px 8px; overflow-x:auto; }
+      .keyboard { min-width:650px; }
+      .key { height:43px; font-size:11px; }
+      .below { grid-template-columns:1fr; }
+      .statusbar { padding:0 6px; }
+      .top { min-height:60px; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap top">
+    <div class="brand">Teste <span>De Teclado</span></div>
+    <a href="https://testdeteclado.com.br/" target="_blank" rel="noopener">Visitar o site principal ↗</a>
+  </div>
+</header>
+<main class="wrap">
+  <section class="intro">
+    <div class="eyebrow">Ferramenta gratuita e online</div>
+    <h1>Teste seu teclado online</h1>
+    <p>Pressione as teclas do seu teclado para verificar se estão funcionando. Cada tecla detectada ficará destacada na tela. Não é necessário instalar nada.</p>
+  </section>
+
+  <section class="panel" aria-label="Testador visual de teclado">
+    <div class="statusbar">
+      <div class="status" aria-live="polite">Teclas testadas: <strong id="count">0</strong> · Última tecla: <span id="lastKey">—</span></div>
+      <div class="actions">
+        <button class="action" id="releaseBtn" type="button">Soltar teclas</button>
+        <button class="action primary" id="clearBtn" type="button">Limpar teste</button>
+      </div>
+    </div>
+
+    <div class="keyboard" id="keyboard">
+      <div class="keyrow">
+        <button class="key" data-code="Escape">Esc</button>
+        <button class="key" data-code="F1">F1</button><button class="key" data-code="F2">F2</button><button class="key" data-code="F3">F3</button><button class="key" data-code="F4">F4</button>
+        <button class="key" data-code="F5">F5</button><button class="key" data-code="F6">F6</button><button class="key" data-code="F7">F7</button><button class="key" data-code="F8">F8</button>
+        <button class="key" data-code="F9">F9</button><button class="key" data-code="F10">F10</button><button class="key" data-code="F11">F11</button><button class="key" data-code="F12">F12</button>
+      </div>
+      <div class="keyrow">
+        <button class="key" data-code="Backquote">`<small>~</small></button>
+        <button class="key" data-code="Digit1">1<small>!</small></button><button class="key" data-code="Digit2">2<small>@</small></button><button class="key" data-code="Digit3">3<small>#</small></button><button class="key" data-code="Digit4">4<small>$</small></button><button class="key" data-code="Digit5">5<small>%</small></button><button class="key" data-code="Digit6">6<small>^</small></button><button class="key" data-code="Digit7">7<small>&amp;</small></button><button class="key" data-code="Digit8">8<small>*</small></button><button class="key" data-code="Digit9">9<small>(</small></button><button class="key" data-code="Digit0">0<small>)</small></button><button class="key" data-code="Minus">-<small>_</small></button><button class="key" data-code="Equal">=<small>+</small></button><button class="key w2" data-code="Backspace">Backspace</button>
+      </div>
+      <div class="keyrow">
+        <button class="key w15" data-code="Tab">Tab</button>
+        <button class="key" data-code="KeyQ">Q</button><button class="key" data-code="KeyW">W</button><button class="key" data-code="KeyE">E</button><button class="key" data-code="KeyR">R</button><button class="key" data-code="KeyT">T</button><button class="key" data-code="KeyY">Y</button><button class="key" data-code="KeyU">U</button><button class="key" data-code="KeyI">I</button><button class="key" data-code="KeyO">O</button><button class="key" data-code="KeyP">P</button><button class="key" data-code="BracketLeft">[</button><button class="key" data-code="BracketRight">]</button><button class="key w15" data-code="Backslash">\</button>
+      </div>
+      <div class="keyrow">
+        <button class="key w2" data-code="CapsLock">Caps Lock</button>
+        <button class="key" data-code="KeyA">A</button><button class="key" data-code="KeyS">S</button><button class="key" data-code="KeyD">D</button><button class="key" data-code="KeyF">F</button><button class="key" data-code="KeyG">G</button><button class="key" data-code="KeyH">H</button><button class="key" data-code="KeyJ">J</button><button class="key" data-code="KeyK">K</button><button class="key" data-code="KeyL">L</button><button class="key" data-code="Semicolon">;</button><button class="key" data-code="Quote">'</button><button class="key w25" data-code="Enter">Enter</button>
+      </div>
+      <div class="keyrow">
+        <button class="key w25" data-code="ShiftLeft">Shift</button>
+        <button class="key" data-code="KeyZ">Z</button><button class="key" data-code="KeyX">X</button><button class="key" data-code="KeyC">C</button><button class="key" data-code="KeyV">V</button><button class="key" data-code="KeyB">B</button><button class="key" data-code="KeyN">N</button><button class="key" data-code="KeyM">M</button><button class="key" data-code="Comma">,</button><button class="key" data-code="Period">.</button><button class="key" data-code="Slash">/</button>
+        <button class="key w25" data-code="ShiftRight">Shift</button>
+      </div>
+      <div class="keyrow">
+        <button class="key w15" data-code="ControlLeft">Ctrl</button><button class="key w15" data-code="MetaLeft">Win</button><button class="key w15" data-code="AltLeft">Alt</button>
+        <button class="key space" data-code="Space">Space</button>
+        <button class="key w15" data-code="AltRight">Alt</button><button class="key w15" data-code="ContextMenu">Menu</button><button class="key w15" data-code="ControlRight">Ctrl</button>
+      </div>
+      <div class="keyrow">
+        <button class="key" data-code="Insert">Ins</button><button class="key" data-code="Home">Home</button><button class="key" data-code="PageUp">PgUp</button>
+        <button class="key" data-code="Delete">Del</button><button class="key" data-code="End">End</button><button class="key" data-code="PageDown">PgDn</button>
+        <button class="key" data-code="ArrowUp">↑</button><button class="key" data-code="ArrowLeft">←</button><button class="key" data-code="ArrowDown">↓</button><button class="key" data-code="ArrowRight">→</button>
+      </div>
+    </div>
+    <div class="legend"><span><i class="dot"></i>Aguardando tecla</span><span><i class="dot blue"></i>Tecla detectada</span></div>
+  </section>
+
+  <section class="below">
+    <div class="info">
+      <h2>Como testar?</h2>
+      <p>Clique nesta página e pressione uma tecla de cada vez. Se a tecla correspondente ficar azul, o navegador recebeu o sinal dessa tecla. Use “Limpar teste” para começar novamente.</p>
+    </div>
+    <div class="info">
+      <h2>Observação</h2>
+      <p>Este teste verifica se o navegador detecta o pressionamento da tecla. Ele não consegue confirmar sozinho se há defeitos físicos, problemas de conexão ou falhas que ocorram fora do navegador.</p>
+    </div>
+  </section>
+</main>
+<footer>
+  <div class="wrap">Ferramenta de demonstração · <a href="https://testdeteclado.com.br/" target="_blank" rel="noopener">testdeteclado.com.br</a></div>
+</footer>
+<script>
+  const tested = new Set();
+  const keys = new Map([...document.querySelectorAll('.key')].map(el => [el.dataset.code, el]));
+  const count = document.getElementById('count');
+  const lastKey = document.getElementById('lastKey');
+
+  function labelFor(event) {
+    if (event.code === 'Space') return 'Space';
+    if (event.code.startsWith('Key')) return event.code.slice(3);
+    if (event.code.startsWith('Digit')) return event.code.slice(5);
+    return event.key.length === 1 ? event.key : event.key;
+  }
+  function press(event) {
+    const code = event.code;
+    const el = keys.get(code);
+    if (el) el.classList.add('active');
+    if (code) tested.add(code);
+    count.textContent = tested.size;
+    lastKey.textContent = labelFor(event) || '—';
+    if (['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Space','Tab','Backspace'].includes(code)) event.preventDefault();
+  }
+  function release(event) {
+    const el = keys.get(event.code);
+    if (el) el.classList.remove('active');
+  }
+  document.addEventListener('keydown', press);
+  document.addEventListener('keyup', release);
+  window.addEventListener('blur', () => document.querySelectorAll('.key.active').forEach(el => el.classList.remove('active')));
+  document.getElementById('clearBtn').addEventListener('click', () => {
+    tested.clear(); count.textContent = '0'; lastKey.textContent = '—';
+    document.querySelectorAll('.key.active').forEach(el => el.classList.remove('active'));
+  });
+  document.getElementById('releaseBtn').addEventListener('click', () => {
+    document.querySelectorAll('.key.active').forEach(el => el.classList.remove('active'));
+  });
+</script>
+</body>
+</html>
